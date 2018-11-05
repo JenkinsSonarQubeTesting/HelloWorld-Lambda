@@ -4,7 +4,9 @@ pipeline {
     }
     stages {
         stage('Build') {
-            sh './gradlew'
+            steps {
+                sh './gradlew'
+            }
         }
         stage('Run Terraform'){
             steps{
