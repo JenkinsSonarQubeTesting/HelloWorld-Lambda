@@ -24,11 +24,8 @@ task deployTerraform (type: Exec){
     commandLine "echo", "Path: ${environment.PATH}"
     if (project.hasProperty('USER_ID')){
         commandLine "terraform", "init"
-        if (project.hasProperty('USER_ID')){
-            echo 'User ID found'
-        }
-        userId = project.findProperty('USER_ID') ?: ''
-        roleName = project.findProperty('ROLE_NAME') ?: ''
-        commandLine "terraform", "apply",  "-var 'aws_user_ID=${userId}'", "-var 'role_name=${roleName}'", "-var 'region=us-east-1'", "-input=false",  "-auto-approve"
+        // userId = project.findProperty('USER_ID') ?: ''
+        // roleName = project.findProperty('ROLE_NAME') ?: ''
+        // commandLine "terraform", "apply",  "-var 'aws_user_ID=${userId}'", "-var 'role_name=${roleName}'", "-var 'region=us-east-1'", "-input=false",  "-auto-approve"
     }
 }
