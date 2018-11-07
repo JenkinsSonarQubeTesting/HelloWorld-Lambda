@@ -40,10 +40,7 @@ task deployTerraform (type: Exec){
         def roleName = project.findProperty('ROLE_NAME') ?: ''
         commandLine "terraform", "init",
                 '-var', "aws_user_ID=${userId}",
-                '-var', "role_name=${roleName}",
-                '-var', "region=us-east-1",
-                "-input=false",
-                "-auto-approve"
+                '-var', "role_name=${roleName}"
         commandLine "terraform", "apply",
                 '-var', "aws_user_ID=${userId}",
                 '-var', "role_name=${roleName}",
