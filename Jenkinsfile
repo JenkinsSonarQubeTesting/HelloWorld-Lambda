@@ -16,7 +16,6 @@ pipeline {
             }
             steps{
                 script{
-                    def terraformHome = tool 'terraform'
                     withEnv(["PATH+terraform=${tool 'terraform'}"]){
                         withCredentials([
                                 string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
