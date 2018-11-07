@@ -1,8 +1,5 @@
 terraform {
   backend "s3" {
-    #assume_role {
-    # role_arn = "arn:aws:iam::270507745549:role/test-deploy-terraform"
-    #}
     bucket                  = "research-veraform-remote-state-s3"
     key                     = "carter-test/terraform.tfstate"
     region                  = "us-east-1"
