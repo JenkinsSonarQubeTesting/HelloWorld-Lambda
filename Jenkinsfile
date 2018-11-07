@@ -9,6 +9,11 @@ pipeline {
             }
         }
         stage('Run Terraform'){
+            when {
+                expression {
+                    return env.BRANCH_NAME == ("master")
+                }
+            }
             steps{
                 script{
                     def terraformHome = tool 'terraform'
