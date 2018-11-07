@@ -8,4 +8,5 @@ public class Hello implements RequestHandler<String, String> {
     public String handleRequest(String input, Context context) {
         return "example.Hello, World!";
     }
+    // Test
 }
