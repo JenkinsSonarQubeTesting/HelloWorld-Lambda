@@ -46,6 +46,6 @@ task deployTerraform (type: Exec){
                 '-var', "region=us-east-1",
                 "-input=false",
                 "-auto-approve"
-                */s
+                */
     }
 }
