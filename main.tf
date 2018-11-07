@@ -1,3 +1,17 @@
+terraform {
+  backend "s3" {
+    shared_credentials_file = "$HOME/.aws/credentials"
+    profile                 = "research"
+    bucket                  = "research-veraform-remote-state-s3"
+    key                     = "carter-test/terraform.tfstate"
+    region                  = "us-east-1"
+    encrypt                 = true
+    dynamodb_table          = "research-veraform-state-lock-dynamo"
+  }
+
+  required_version = ">= 0.11.4"
+}
+
 provider "aws" {
   assume_role {
     role_arn = "arn:aws:iam::${var.aws_user_ID}:role/${var.role_name}"
