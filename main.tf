@@ -17,6 +17,7 @@ provider "aws" {
     role_arn = "arn:aws:iam::${var.aws_user_ID}:role/${var.role_name}"
   }
   region = "${var.region}"
+  version = ">= 1.11.0"
 }
 
 resource "aws_security_group" "terraform-test" {
