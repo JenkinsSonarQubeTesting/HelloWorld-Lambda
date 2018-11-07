@@ -47,7 +47,7 @@ resource "aws_iam_role" "iam_for_lambda" {
       },
       "Effect": "Allow",
       "Sid": ""
-    }
+    }}
   ]
 }
 EOF
