@@ -1,2 +1,3 @@
 rootProject.name = 'lambda'
 include 'Lambda:HelloWorld'
+include 'Lambda:ExampleLambda'
