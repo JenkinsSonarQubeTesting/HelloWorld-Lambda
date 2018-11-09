@@ -38,10 +38,10 @@ task deployTerraform (type: Exec){
     if (project.hasProperty('USER_ID')){
         def userId = project.findProperty('USER_ID') ?: ''
         def roleName = project.findProperty('ROLE_NAME') ?: ''
-        commandLine "terraform", "--version"
         commandLine "terraform", "init",
                     "-input=false"
         commandLine "terraform", "plan"
+        commandLine "terraform", "show"
         commandLine "terraform", "apply",
                 '-var', "aws_user_ID=${userId}",
                 '-var', "role_name=${roleName}",
