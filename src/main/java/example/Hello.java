@@ -6,6 +6,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 public class Hello implements RequestHandler<String, String> {
     @Override
     public String handleRequest(String input, Context context) {
-        return "example.Hello, World! Testing...";
+        return "example.Hello, World! Testing on different branch....";
     }
 }
