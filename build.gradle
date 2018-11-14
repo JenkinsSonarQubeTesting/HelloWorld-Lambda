@@ -64,6 +64,7 @@ task deployTerraform (type: Exec){
                 '-var', "aws_user_ID=${userId}",
                 '-var', "role_name=${roleName}",
                 '-var', "region=us-east-1",
+                '-var', "version=${project.version}",
                 "-input=false",
                 "-auto-approve"
 
