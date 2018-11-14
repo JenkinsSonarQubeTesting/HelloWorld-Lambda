@@ -6,7 +6,7 @@ pipeline {
         stage('Build/Upload') {
             steps {
                 sh './gradlew'
-                //sh './gradlew buildZip'
+                sh './gradlew buildZip'
                 //sh './gradlew uploadToS3'
             }
         }
