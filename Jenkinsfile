@@ -30,7 +30,12 @@ pipeline {
         stage('Upload to S3'){
             steps{
                 script{
-                    sh "./gradlew uploadToS3"
+                    withCredentials([
+                            string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
+                            string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
+                    ]){
+                        sh "./gradlew uploadToS3 -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME}"
+                    }
                 }
             }
         }
