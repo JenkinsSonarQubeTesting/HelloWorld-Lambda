@@ -43,9 +43,15 @@ allprojects {
         }
     }
 
+    /*
+    task thingy (type: Exec) {
+        commandLine 'echo', project.rootProject.name, project.name, project.version, buildZip.archivePath
+    }
+    */
+
     task uploadToS3 (type: Exec) {
         commandLine 'aws', 's3', 'cp',
-                'Lambda/HelloWorld/build/distributions/*',
+                'Lambda/HelloWorld/build/distributions/HelloWorld-1.0.zip',
                 's3://carter-jenkins-test-bucket/HelloWorld-Lambda/HelloWorld/HelloWorld.1.0/',
                 '--region', 'us-east-1'
     }
@@ -66,7 +72,6 @@ task deployTerraform (type: Exec){
         commandLine "terraform", "init",
                     "-input=false"
         commandLine "terraform", "plan"
-        commandLine "terraform", "show"
         commandLine "terraform", "apply",
                 '-var', "aws_user_ID=${userId}",
                 '-var', "role_name=${roleName}",
