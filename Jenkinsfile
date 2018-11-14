@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh './gradlew'
                 sh './gradlew buildZip'
-                sh './gradlew :uploadToS3'
+                sh './gradlew uploadToS3'
             }
         }
         stage('Run Terraform'){
