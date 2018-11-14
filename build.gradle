@@ -46,7 +46,7 @@ allprojects {
     task uploadToS3 (type: Exec) {
         commandLine 'aws', 's3', 'cp',
                 'Lambda/HelloWorld/build/distributions/HelloWorld-1.0.zip',
-                's3://carter-jenkins-test-bucket/HelloWorld-Lambda/HelloWorld/HelloWorld.1.0/',
+                's3://carter-jenkins-test-bucket/HelloWorld-Lambda/HelloWorld/*',
                 '--region', 'us-east-1'
     }
 }
