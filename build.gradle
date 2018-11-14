@@ -57,12 +57,12 @@ task buildZip(type: Zip) {
 
 build.dependsOn buildZip
 
-task uploadToS3 (type: Exec) {
-    commandLine 'aws', 's3', 'cp',
-            'Lambda/HelloWorld/build/distributions/HelloWorld-1.0.zip',
-            's3://carter-jenkins-test-bucket/HelloWorld-Lambda/HelloWorld/HelloWorld.1.0/',
-            '--region', 'us-east-1'
-}
+//task uploadToS3 (type: Exec) {
+//    commandLine 'aws', 's3', 'cp',
+//            'Lambda/HelloWorld/build/distributions/HelloWorld-1.0.zip',
+//            's3://carter-jenkins-test-bucket/HelloWorld-Lambda/HelloWorld/HelloWorld.1.0/',
+//            '--region', 'us-east-1'
+//}
 
 task initTerraform (type: Exec){
     environment "PATH", "${environment.PATH}"
