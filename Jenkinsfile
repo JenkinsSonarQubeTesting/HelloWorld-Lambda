@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Build/Upload') {
             steps {
-                sh './gradlew'
+                sh './gradlew buildZip'
                 sh 'ls -R'
             }
         }
