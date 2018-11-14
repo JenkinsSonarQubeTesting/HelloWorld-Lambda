@@ -79,3 +79,4 @@ task uploadToS3 (type: Exec) {
                 's3://carter-jenkins-test-bucket/HelloWorld-Lambda/HelloWorld/HelloWorld.1.0/',
                 '--region', 'us-east-1'
 }
+uploadToS3.dependsOn build

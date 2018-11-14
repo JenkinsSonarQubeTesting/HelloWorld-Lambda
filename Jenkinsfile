@@ -3,9 +3,9 @@ pipeline {
         label 'testNode'
     }
     stages {
-        stage('Build') {
+        stage('Build/Upload') {
             steps {
-                sh './gradlew build'
+                sh './gradlew uploadToS3'
             }
         }
         stage('Run Terraform'){
@@ -23,18 +23,6 @@ pipeline {
                         ]){
                             sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME}"
                         }
-                    }
-                }
-            }
-        }
-        stage('Upload to S3'){
-            steps{
-                script{
-                    withCredentials([
-                            string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
-                            string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
-                    ]){
-                        sh "./gradlew uploadToS3 -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME}"
                     }
                 }
             }
