@@ -35,14 +35,6 @@ allprojects {
         )
     }
     
-    task buildZip(type: Zip) {
-        from compileJava
-        from processResources
-        into('lib') {
-            from configurations.compileClasspath
-        }
-    }
-
     /*
     task thingy (type: Exec) {
         commandLine 'echo', project.rootProject.name, project.name, project.version, buildZip.archivePath
@@ -53,6 +45,14 @@ allprojects {
 
 wrapper {
     gradleVersion = '4.10.2'
+}
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.compileClasspath
+    }
 }
 
 build.dependsOn buildZip
