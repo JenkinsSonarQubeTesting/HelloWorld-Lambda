@@ -64,15 +64,21 @@ task uploadToS3 (type: Exec) {
             '--region', 'us-east-1'
 }
 
-task deployTerraform (type: Exec){
+task initTerraform (type: Exec){
     environment "PATH", "${environment.PATH}"
-    commandLine "echo", environment.PATH
     if (project.hasProperty('USER_ID')){
         def userId = project.findProperty('USER_ID') ?: ''
         def roleName = project.findProperty('ROLE_NAME') ?: ''
         commandLine "terraform", "init",
-                    "-input=false"
-        commandLine "terraform", "plan"
+                "-input=false"
+    }
+}
+
+task deployTerraform (type: Exec){
+    environment "PATH", "${environment.PATH}"
+    if (project.hasProperty('USER_ID')){
+        def userId = project.findProperty('USER_ID') ?: ''
+        def roleName = project.findProperty('ROLE_NAME') ?: ''
         commandLine "terraform", "apply",
                 '-var', "aws_user_ID=${userId}",
                 '-var', "role_name=${roleName}",
@@ -83,3 +89,5 @@ task deployTerraform (type: Exec){
 
     }
 }
+
+deployTerraform.dependsOn initTerraform
