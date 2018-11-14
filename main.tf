@@ -56,8 +56,8 @@ EOF
 resource "aws_lambda_function" "test_lambda" {
   // Using s3_bucket and s3_key instead of filename
   s3_bucket        = "carter-jenkins-test-bucket"
-  s3_key           = "HelloWorld/HelloWorld-1.0-SNAPSHOT.zip"
-  s3_object_version = "${var.version}"
+  s3_key           = "HelloWorld/HelloWorld-1.0.zip"
+  //s3_object_version = "${var.version}"
   function_name    = "Hello"
   role             = "${aws_iam_role.iam_for_lambda.arn}"
   handler          = "example.Hello"

@@ -27,6 +27,13 @@ pipeline {
                 }
             }
         }
+        stage('Upload to S3'){
+            steps{
+                script{
+                    sh "./gradlew uploadToS3"
+                }
+            }
+        }
     }
 
 
