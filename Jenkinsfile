@@ -5,7 +5,8 @@ pipeline {
     stages {
         stage('Build/Upload') {
             steps {
-                sh './gradlew uploadToS3'
+                sh './gradlew'
+                sh 'ls -R'
             }
         }
         stage('Run Terraform'){

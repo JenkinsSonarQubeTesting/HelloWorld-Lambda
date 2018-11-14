@@ -46,7 +46,6 @@ allprojects {
     task uploadToS3 (type: Exec) {
         def userId = project.findProperty('USER_ID') ?: ''
         def roleName = project.findProperty('ROLE_NAME') ?: ''
-        commandLine 'ls', '-R'
         commandLine 'aws', 's3', 'cp',
                 'Lambda/HelloWorld/build/distributions/HelloWorld-1.0.zip',
                 's3://carter-jenkins-test-bucket/HelloWorld-Lambda/HelloWorld/HelloWorld.1.0/',
