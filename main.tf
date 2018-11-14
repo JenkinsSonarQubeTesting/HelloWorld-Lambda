@@ -54,11 +54,13 @@ EOF
 }
 
 resource "aws_lambda_function" "test_lambda" {
-  filename         = "Lambda/HelloWorld/build/distributions/HelloWorld-1.0-SNAPSHOT.zip"
+  // Using s3_bucket and s3_key instead of filename
+  s3_bucket        = "carter-jenkins-test-bucket"
+  s3_key           = "HelloWorld/HelloWorld-1.0-SNAPSHOT.zip"
   function_name    = "Hello"
   role             = "${aws_iam_role.iam_for_lambda.arn}"
   handler          = "example.Hello"
-  source_code_hash = "${base64sha256(file("Lambda/HelloWorld/build/distributions/HelloWorld-1.0-SNAPSHOT.zip"))}"
+  //source_code_hash = "${base64sha256(file("build/distributions/lambda-1.0-SNAPSHOT.zip"))}"
   runtime          = "java8"
 
   environment {
