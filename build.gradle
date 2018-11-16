@@ -64,6 +64,10 @@ task uploadToS3 (type: Exec) {
             '--region', 'us-east-1'
 }
 
+task whichTerraform (type: Exec){
+    commandLine 'which', 'terraform'
+}
+
 task initTerraform (type: Exec){
     environment "PATH", "${environment.PATH}"
     if (project.hasProperty('USER_ID')){
