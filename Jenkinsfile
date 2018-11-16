@@ -17,14 +17,16 @@ pipeline {
                 }
             }
             steps{
-                script{
-                    withEnv(["PATH+terraform=${tool 'terraform'}"]){
-                        withCredentials([
-                                string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
-                                string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
-                        ]){
-                            sh "./gradlew initTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
-                            sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
+                node 'testNode' {
+                    script {
+                        withEnv(["PATH+terraform=${tool 'terraform'}"]) {
+                            withCredentials([
+                                    string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
+                                    string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
+                            ]) {
+                                sh "./gradlew initTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
+                                sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
+                            }
                         }
                     }
                 }
