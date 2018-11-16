@@ -19,8 +19,7 @@ pipeline {
             }
             steps{
                 script {
-                    def terraformTool = tool 'terraform'
-                    withEnv(["PATH+terraform=${terraformTool.substring(0, terraformTool.lastIndexOf('/'))}"]) {
+                    withEnv(["PATH+terraform=${tool 'terraform'}"]) {
                         withCredentials([
                                 string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
                                 string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
