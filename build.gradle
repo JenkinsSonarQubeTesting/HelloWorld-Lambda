@@ -68,14 +68,22 @@ task uploadToS3 (type: Exec) {
             '--region', 'us-east-1'
 }
 
+task showEnv (type: Exec){
+    commandLine 'env'
+}
+
 task whichTerraform (type: Exec){
     commandLine 'which', 'terraform'
 }
+
+whichTerraform.dependsOn showEnv
 
 task initTerraform (type: Exec){
     commandLine "terraform", "init",
             "-input=false"
 }
+
+initTerraform.dependsOn whichTerraform
 
 task deployTerraform (type: Exec){ 
     commandLine "terraform", "apply",
