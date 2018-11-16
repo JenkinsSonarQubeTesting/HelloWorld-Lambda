@@ -77,13 +77,10 @@ task initTerraform (type: Exec){
             "-input=false"
 }
 
-task deployTerraform (type: Exec){
-    environment "PATH", "${environment.PATH}"
-    def userId = project.findProperty('USER_ID') ?: ''
-    def roleName = project.findProperty('ROLE_NAME') ?: ''
+task deployTerraform (type: Exec){ 
     commandLine "terraform", "apply",
-            '-var', "aws_user_ID=${userId}",
-            '-var', "role_name=${roleName}",
+            '-var', "aws_user_ID=${project.findProperty('USER_ID') ?: ''}",
+            '-var', "role_name=${project.findProperty('ROLE_NAME') ?: ''}",
             '-var', "region=us-east-1",
             '-var', "version=${project.version}",
             "-input=false",
