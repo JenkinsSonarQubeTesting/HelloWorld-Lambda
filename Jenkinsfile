@@ -18,19 +18,16 @@ pipeline {
                 }
             }
             steps{
-                node('testNode') {
-                    script {
-                        checkout scm
-                        withEnv(["PATH+terraform=${tool 'terraform'}"]) {
-                            withCredentials([
-                                    string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
-                                    string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
-                            ]) {
-                                sh './gradlew whereIsThis'
-                                sh "./gradlew whichTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
-                                sh "./gradlew initTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
-                                sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
-                            }
+                script {
+                    withEnv(["PATH+terraform=${tool 'terraform'}"]) {
+                        withCredentials([
+                                string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
+                                string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
+                        ]) {
+                            sh './gradlew whereIsThis'
+                            sh "./gradlew whichTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
+                            sh "./gradlew initTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
+                            sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
                         }
                     }
                 }
