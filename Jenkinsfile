@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh './gradlew'
                 sh './gradlew buildZip'
-                sh './gradlew whereIsThis'
+//                sh './gradlew whereIsThis'
 //                sh './gradlew uploadToS3'
             }
         }
