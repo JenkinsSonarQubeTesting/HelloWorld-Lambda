@@ -78,11 +78,17 @@ task showEnv (type: Exec){
 
 showEnv.dependsOn showLs
 
+task typeTerraform (type: Exec){
+    commandLine 'sh', '-c', 'file ${which terraform}'
+}
+
+typeTerraform.dependsOn showEnv
+
 task whichTerraform (type: Exec){
     commandLine 'which', 'terraform'
 }
 
-whichTerraform.dependsOn showEnv
+whichTerraform.dependsOn typeTerraform
 
 task initTerraform (type: Exec){
     commandLine "terraform", "init",
