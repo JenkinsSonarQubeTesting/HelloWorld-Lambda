@@ -34,7 +34,7 @@ resource "aws_security_group" "terraform-test" {
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name = "iam_for_lambda"
+  name = "${var.group}-${var.name}"
 
   assume_role_policy = <<EOF
 {
