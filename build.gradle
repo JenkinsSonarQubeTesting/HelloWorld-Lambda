@@ -69,7 +69,7 @@ task uploadToS3 (type: Exec) {
 }
 
 task showLs (type: Exec){
-    commandLine 'ls -R'
+    commandLine 'ls', '-R'
 }
 
 task showEnv (type: Exec){
