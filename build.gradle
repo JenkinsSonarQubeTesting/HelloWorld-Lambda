@@ -86,7 +86,7 @@ typeTerraform.dependsOn showEnv
 */
 
 task whichTerraform (type: Exec){
-    commandLine 'which', 'terraform'
+    commandLine 'terraform'
 }
 
 //whichTerraform.dependsOn typeTerraform
