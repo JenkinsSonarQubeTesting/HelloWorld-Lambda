@@ -30,7 +30,7 @@ pipeline {
 //                                    "-var region=us-east-1 " +
 //                                    "-input=false " +
 //                                    "-auto-approve"
-                            sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace --debug"
+                            sh "./gradlew -Dorg.gradle.daemon=false deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace --debug"
                         }
                     }
                 }
