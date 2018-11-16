@@ -68,9 +68,15 @@ task uploadToS3 (type: Exec) {
             '--region', 'us-east-1'
 }
 
+task showLs (type: Exec){
+    commandLine 'ls -R'
+}
+
 task showEnv (type: Exec){
     commandLine 'env'
 }
+
+showEnv.dependsOn showLs
 
 task whichTerraform (type: Exec){
     commandLine 'which', 'terraform'
@@ -85,7 +91,7 @@ task initTerraform (type: Exec){
 
 initTerraform.dependsOn whichTerraform
 
-task deployTerraform (type: Exec){ 
+task deployTerraform (type: Exec){
     commandLine "terraform", "apply",
             '-var', "aws_user_ID=${project.findProperty('USER_ID') ?: ''}",
             '-var', "role_name=${project.findProperty('ROLE_NAME') ?: ''}",
