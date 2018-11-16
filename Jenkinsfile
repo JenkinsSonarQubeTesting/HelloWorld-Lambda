@@ -18,26 +18,17 @@ pipeline {
             }
             steps{
                 script {
-                    withEnv(["PATH+terraform=${tool 'terraform'}"]) {
+                    withEnv(["PATH+terraform=${tool 'terraform'}",
+                             "GRADLE_OPTS='-Dorg.gradle.daemon=false'"]) {
                         withCredentials([
                                 string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
                                 string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
                         ]) {
-//                            sh "terraform init"
-//                            sh "terraform apply " +
-//                                    "-var aws_user_ID=${USER_ID} " +
-//                                    "-var role_name=${ROLE_NAME} " +
-//                                    "-var region=us-east-1 " +
-//                                    "-input=false " +
-//                                    "-auto-approve"
-                            sh "./gradlew -Dorg.gradle.daemon=false deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace --debug"
+                            sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME}"
                         }
                     }
                 }
             }
         }
     }
-
-
-
 }

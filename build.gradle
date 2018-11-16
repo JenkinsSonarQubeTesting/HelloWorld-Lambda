@@ -57,10 +57,6 @@ task buildZip(type: Zip) {
 
 build.dependsOn buildZip
 
-task whereIsThis (type: Exec) {
-    commandLine 'pwd'
-}
-
 task uploadToS3 (type: Exec) {
     commandLine 'aws', 's3', 'cp',
             'Lambda/HelloWorld/build/distributions/HelloWorld-1.0.zip',
@@ -68,35 +64,10 @@ task uploadToS3 (type: Exec) {
             '--region', 'us-east-1'
 }
 
-task showLs (type: Exec){
-    commandLine 'ls', '-R'
-}
-
-task showEnv (type: Exec){
-    commandLine 'env'
-}
-
-showEnv.dependsOn showLs
-/*
-task typeTerraform (type: Exec){
-    commandLine 'sh', '-c', 'file ${which terraform}'
-}
-
-typeTerraform.dependsOn showEnv
-*/
-
-task whichTerraform (type: Exec){
-    commandLine "terraform"
-}
-
-//whichTerraform.dependsOn typeTerraform
-
 task initTerraform (type: Exec){
     commandLine "terraform", "init",
             "-input=false"
 }
-
-initTerraform.dependsOn whichTerraform
 
 task deployTerraform (type: Exec){
     commandLine "terraform", "apply",
