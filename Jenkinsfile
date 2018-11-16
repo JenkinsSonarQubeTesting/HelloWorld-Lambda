@@ -17,7 +17,7 @@ pipeline {
                 }
             }
             steps{
-                node 'testNode' {
+                node('testNode') {
                     script {
                         withEnv(["PATH+terraform=${tool 'terraform'}"]) {
                             withCredentials([
