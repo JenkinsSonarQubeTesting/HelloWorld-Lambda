@@ -73,14 +73,8 @@ task whichTerraform (type: Exec){
 }
 
 task initTerraform (type: Exec){
-    doLast {
-        if (project.hasProperty('USER_ID')) {
-            def userId = project.findProperty('USER_ID') ?: ''
-            def roleName = project.findProperty('ROLE_NAME') ?: ''
-            commandLine "terraform", "init",
-                    "-input=false"
-        }
-    }
+    commandLine "terraform", "init",
+            "-input=false"
 }
 
 task deployTerraform (type: Exec){
