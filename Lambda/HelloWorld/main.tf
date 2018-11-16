@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "terraform-test" {
-  name        = "terraform-test"
+  name        = "${var.group}-${var.name}"
   description = "Allow all inbound traffic"
 
   ingress {
@@ -29,7 +29,7 @@ resource "aws_security_group" "terraform-test" {
   }
 
   tags {
-    Name = "terraform-test"
+    Name = "${var.group}-${var.name}"
   } 
 }
 
