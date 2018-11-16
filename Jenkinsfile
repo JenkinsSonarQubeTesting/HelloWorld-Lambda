@@ -7,8 +7,8 @@ pipeline {
             steps {
                 sh './gradlew'
                 sh './gradlew buildZip'
-//                sh './gradlew whereIsThis'
-//                sh './gradlew uploadToS3'
+                sh './gradlew whereIsThis'
+                sh './gradlew uploadToS3'
             }
         }
         stage('Run Terraform'){
@@ -24,8 +24,8 @@ pipeline {
                                 string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
                                 string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
                         ]) {
-//                            sh './gradlew whereIsThis'
-//                            sh "./gradlew whichTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
+                            sh './gradlew whereIsThis'
+                            sh "./gradlew whichTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
                             sh "./gradlew initTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
                             sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME} --stacktrace"
                         }
