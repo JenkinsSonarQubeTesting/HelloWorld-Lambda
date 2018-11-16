@@ -1,1 +1,39 @@
 version '1.0-SNAPSHOT'
+
+subprojects { sp ->
+    task buildZip(type: Zip) {
+        from compileJava
+        from processResources
+        into('lib') {
+            from configurations.compileClasspath
+        }
+    }
+
+    build.dependsOn buildZip
+
+    afterEvaluate {
+        task uploadToS3(type: Exec) {
+            commandLine 'aws', 's3', 'cp',
+                    buildZip.archivePath,
+                    "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
+                    '--region', 'us-east-1'
+        }
+
+        task deployTerraform (type: Exec){
+            commandLine "terraform", "apply",
+                    '-var', "aws_user_ID=${project.findProperty('USER_ID') ?: ''}",
+                    '-var', "role_name=${project.findProperty('ROLE_NAME') ?: ''}",
+                    '-var', "region=us-east-1",
+                    '-var', "version=${sp.version}",
+                    "-input=false",
+                    "-auto-approve"
+        }
+
+        deployTerraform.dependsOn initTerraform
+    }
+
+    task initTerraform (type: Exec){
+        commandLine "terraform", "init",
+                "-input=false"
+    }
+}

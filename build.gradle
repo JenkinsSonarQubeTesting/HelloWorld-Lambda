@@ -34,49 +34,8 @@ allprojects {
                 'com.amazonaws:aws-lambda-java-events:1.1.0'
         )
     }
-    
-    /*
-    task thingy (type: Exec) {
-        commandLine 'echo', project.rootProject.name, project.name, project.version, buildZip.archivePath
-    }
-    */
-
 }
 
 wrapper {
     gradleVersion = '4.10.2'
 }
-
-task buildZip(type: Zip) {
-    from compileJava
-    from processResources
-    into('lib') {
-        from configurations.compileClasspath
-    }
-}
-
-build.dependsOn buildZip
-
-task uploadToS3 (type: Exec) {
-    commandLine 'aws', 's3', 'cp',
-            'Lambda/HelloWorld/build/distributions/HelloWorld-1.0.zip',
-            's3://carter-jenkins-test-bucket/HelloWorld-Lambda/HelloWorld/HelloWorld.1.0/',
-            '--region', 'us-east-1'
-}
-
-task initTerraform (type: Exec){
-    commandLine "terraform", "init",
-            "-input=false"
-}
-
-task deployTerraform (type: Exec){
-    commandLine "terraform", "apply",
-            '-var', "aws_user_ID=${project.findProperty('USER_ID') ?: ''}",
-            '-var', "role_name=${project.findProperty('ROLE_NAME') ?: ''}",
-            '-var', "region=us-east-1",
-            '-var', "version=${project.version}",
-            "-input=false",
-            "-auto-approve"
-}
-
-deployTerraform.dependsOn initTerraform
