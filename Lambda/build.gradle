@@ -25,6 +25,9 @@ subprojects { sp ->
                     '-var', "role_name=${project.findProperty('ROLE_NAME') ?: ''}",
                     '-var', "region=us-east-1",
                     '-var', "version=${sp.version}",
+                    '-var', "name=${sp.name}",
+                    '-var', "group=${project.rootProject.name}",
+                    '-var', "handler_class=${sp.ext.handlerClassName}",
                     "-input=false",
                     "-auto-approve"
         }
