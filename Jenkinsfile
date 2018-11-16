@@ -13,7 +13,7 @@ pipeline {
         stage('Run Terraform'){
             when {
                 expression {
-                    return env.BRANCH_NAME == ("master")
+                    env.BRANCH_NAME == ("master")
                 }
             }
             steps{
@@ -31,7 +31,4 @@ pipeline {
             }
         }
     }
-
-
-
 }
