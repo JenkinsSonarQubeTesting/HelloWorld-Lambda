@@ -19,6 +19,7 @@ pipeline {
             steps{
                 node('testNode') {
                     script {
+                        checkout scm
                         withEnv(["PATH+terraform=${tool 'terraform'}"]) {
                             withCredentials([
                                     string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
