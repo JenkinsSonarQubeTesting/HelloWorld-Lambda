@@ -34,7 +34,7 @@ resource "aws_security_group" "terraform-test" {
 }
 
 module "Example_IAM" {
-  source = "../Modules/IAMRole"
+  source = "../../Modules/IAMRole"
   group = "${var.group}"
   name = "${var.name}"
 }
