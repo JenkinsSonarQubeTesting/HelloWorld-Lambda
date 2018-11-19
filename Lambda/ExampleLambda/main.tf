@@ -34,10 +34,11 @@ resource "aws_security_group" "terraform-test" {
 }
 
 module "Example_IAM" {
-  source = "./Modules/IAMRole"
+  source = "../Modules/IAMRole"
   group = "${var.group}"
   name = "${var.name}"
 }
+
 /*
 resource "aws_iam_role" "iam_for_lambda" {
   name = "${var.group}-${var.name}"
