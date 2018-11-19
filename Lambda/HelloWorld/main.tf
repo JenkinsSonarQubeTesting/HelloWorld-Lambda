@@ -33,6 +33,13 @@ resource "aws_security_group" "terraform-test" {
   } 
 }
 
+module "Example_IAM" {
+  source = "../../Modules/IAMRole"
+  group = "${var.group}"
+  name = "${var.name}"
+}
+
+/*
 resource "aws_iam_role" "iam_for_lambda" {
   name = "${var.group}-${var.name}"
 
@@ -52,7 +59,18 @@ resource "aws_iam_role" "iam_for_lambda" {
 }
 EOF
 }
+*/
 
+module "Example_Lambda" {
+  source = "../../Modules/LambdaFunction"
+  group = "${var.group}"
+  name = "${var.name}"
+  version = "${var.version}"
+  role = "${module.Example_IAM.role_arn}"
+  handler_class = "${var.handler_class}"
+}
+
+/*
 resource "aws_lambda_function" "test_lambda" {
   s3_bucket        = "carter-jenkins-test-bucket"
   s3_key           = "${var.group}/${var.name}/${var.name}.${var.version}/${var.name}-${var.version}.zip"
@@ -67,3 +85,4 @@ resource "aws_lambda_function" "test_lambda" {
     }
   }
 }
+*/
