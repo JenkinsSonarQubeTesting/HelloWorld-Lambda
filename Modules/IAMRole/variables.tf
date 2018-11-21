@@ -1,2 +1,0 @@
-variable "group" {}
-variable "name" {}
