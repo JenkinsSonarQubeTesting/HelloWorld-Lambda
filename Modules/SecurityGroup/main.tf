@@ -1,4 +1,4 @@
-resource "aws_security_group" "${var.group}-${var.name}}" {
+resource "aws_security_group" "test_SG" {
   name        = "${var.group}-${var.name}"
   description = "Allow all inbound traffic"
 
