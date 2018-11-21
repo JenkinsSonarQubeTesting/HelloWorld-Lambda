@@ -65,7 +65,7 @@ module "Example_Lambda" {
   source = "../../Modules/LambdaFunction"
   group = "${var.group}"
   name = "${var.name}"
-  version = "${var.version}"
+  release_version = "${var.version}"
   role = "${module.Example_IAM.role_arn}"
   handler_class = "${var.handler_class}"
 }
