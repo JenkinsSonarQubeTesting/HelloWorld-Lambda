@@ -18,20 +18,20 @@ provider "aws" {
 }
 
 module "Example_SG" {
-  // Private repository - Clone using SSH
-  source = "git@github.com:Carter-DM/RemoteTFModules/Modules/SecurityGroup.git"
+  // Public repository - Clone over HTTPS
+  source = "github.com/JenkinsSonarQubeTesting/RemoteTerraform/Modules/SecurityGroup"
   group = "${var.group}"
   name = "${var.name}"
 }
 
 module "Example_IAM" {
-  source = "git@github.com:Carter-DM/RemoteTFModules/Modules/IAMRole.git"
+  source = "github.com/JenkinsSonarQubeTesting/RemoteTerraform/Modules/IAMRole"
   group = "${var.group}"
   name = "${var.name}"
 }
 
 module "Example_Lambda" {
-  source = "git@github.com:Carter-DM/RemoteTFModules/Modules/LambdaFunction.git"
+  source = "github.com/JenkinsSonarQubeTesting/RemoteTerraform/Modules/LambdaFunction"
   group = "${var.group}"
   name = "${var.name}"
   release_version = "${var.version}"
