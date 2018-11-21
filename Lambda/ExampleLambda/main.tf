@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 module "Example_SG" {
-  // Public repository - Clone over HTTPS
+  // Private repository - Clone using SSH
   source = "git@github.com:Carter-DM/RemoteTFModules/Modules/SecurityGroup.git"
   group = "${var.group}"
   name = "${var.name}"

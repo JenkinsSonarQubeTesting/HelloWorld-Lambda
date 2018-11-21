@@ -24,6 +24,7 @@ pipeline {
                                 string(credentialsId: 'Carter-Research-ID', variable: 'USER_ID'),
                                 string(credentialsId: 'aws-role-deploy', variable: 'ROLE_NAME')
                         ]) {
+                            git branch: 'master', credentialsId: 'CarterDMGithubKey', url: 'ssh://git@github.com:Carter-DM/RemoteTFModules.git'
                             sh "./gradlew deployTerraform -PUSER_ID=${USER_ID} -PROLE_NAME=${ROLE_NAME}"
                         }
                     }
