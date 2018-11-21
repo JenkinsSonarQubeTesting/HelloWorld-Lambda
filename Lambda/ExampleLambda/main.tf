@@ -19,7 +19,7 @@ provider "aws" {
 
 module "Example_SG" {
   // Public repository - Clone over HTTPS
-  source = "github.com/JenkinsSonarQubeTesting/RemoteTerraform/tree/master/Modules/SecurityGroup"
+  source = "github.com/JenkinsSonarQubeTesting/RemoteTerraform/Modules/SecurityGroup"
   group = "${var.group}"
   name = "${var.name}"
 }
