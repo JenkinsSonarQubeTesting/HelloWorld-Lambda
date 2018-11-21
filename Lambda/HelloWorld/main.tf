@@ -18,19 +18,19 @@ provider "aws" {
 }
 
 module "Example_SG" {
-  source = "../../Modules/SecurityGroup"
+  source = "github.com/JenkinsSonarQubeTesting/RemoteTerraform/Modules/SecurityGroup"
   group = "${var.group}"
   name = "${var.name}"
 }
 
 module "Example_IAM" {
-  source = "../../Modules/IAMRole"
+  source = "github.com/JenkinsSonarQubeTesting/RemoteTerraform/Modules/IAMRole"
   group = "${var.group}"
   name = "${var.name}"
 }
 
 module "Example_Lambda" {
-  source = "../../Modules/LambdaFunction"
+  source = "github.com/JenkinsSonarQubeTesting/RemoteTerraform/Modules/LambdaFunction"
   group = "${var.group}"
   name = "${var.name}"
   release_version = "${var.version}"
