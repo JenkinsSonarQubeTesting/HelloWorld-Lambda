@@ -31,6 +31,10 @@ subprojects { sp ->
                     "-input=false",
                     "-auto-approve"
         }
+        
+        task echoVersion(type: Exec){
+            commandLine "echo", "${sp.version}"
+        }
 
         deployTerraform.dependsOn initTerraform
     }
