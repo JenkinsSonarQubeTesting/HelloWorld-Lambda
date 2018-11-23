@@ -12,11 +12,29 @@ subprojects { sp ->
     build.dependsOn buildZip
 
     afterEvaluate {
-        task uploadToS3(type: Exec) {
-            commandLine 'aws', 's3', 'cp',
+        task checkS3(type: Exec) {
+            commandLine 'aws', 's3', 'ls',
                     buildZip.archivePath,
-                    "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
+                    "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/${sp.name}-${sp.version}.zip",
                     '--region', 'us-east-1'
+            ignoreExitValue = true
+            ext.exitValue = {
+                execResult.exitValue
+            }
+        }
+        buildZip.dependsOn checkS3
+        buildZip.doFirst {
+            if (tasks.checkS3.exitValue != 0) { throw new StopExecutionException() }
+        }
+
+        task uploadToS3(type: Exec) {
+            dependsOn checkS3
+            doLast {
+                commandLine 'aws', 's3', 'cp',
+                        buildZip.archivePath,
+                        "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
+                        '--region', 'us-east-1'
+            }
         }
 
         task deployTerraform (type: Exec){
