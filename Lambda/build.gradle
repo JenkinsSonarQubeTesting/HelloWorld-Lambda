@@ -13,7 +13,7 @@ subprojects { sp ->
 
     afterEvaluate {
         task checkS3(type: Exec) {
-            commandLine 'aws', 's3', 'ls'
+            commandLine 'aws', 's3', 'ls',
                     "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/${sp.name}-${sp.version}.zip",
                     '--region', 'us-east-1'
             ignoreExitValue true
