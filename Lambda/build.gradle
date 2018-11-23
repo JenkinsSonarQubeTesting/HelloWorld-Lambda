@@ -23,11 +23,11 @@ subprojects { sp ->
         }
         buildZip.dependsOn checkS3
         buildZip.doFirst {
-            if (tasks.checkS3.exitValue == 0) { throw new StopExecutionException() }
+            if (tasks.checkS3.exitValue != 0) { throw new StopExecutionException() }
         }
 
         task uploadToS3(type: Exec) {
-            dependsOn checkS3
+            dependsOn buildZip
             doLast {
                 commandLine 'aws', 's3', 'cp',
                         buildZip.archivePath,
