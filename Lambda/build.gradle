@@ -36,7 +36,7 @@ subprojects { sp ->
                     "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
                     '--region', 'us-east-1'
         }
-        uploadToS3.onlyIf {tasks.checkS3.exitValue != 0}
+        uploadToS3.onlyIf {tasks.checkS3.exitValue == 0}
 
         task deployTerraform (type: Exec){
             commandLine "terraform", "apply",
