@@ -27,13 +27,11 @@ subprojects { sp ->
         }
 
         task uploadToS3(type: Exec) {
-            dependsOn buildZip
-            doLast {
-                commandLine 'aws', 's3', 'cp',
-                        buildZip.archivePath,
-                        "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
-                        '--region', 'us-east-1'
-            }
+            dependsOn checkS3
+            commandLine 'aws', 's3', 'cp',
+                    buildZip.archivePath,
+                    "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
+                    '--region', 'us-east-1'
         }
 
         task deployTerraform (type: Exec){
