@@ -22,12 +22,10 @@ subprojects { sp ->
                 0
             }
         }
-        /*
         buildZip.dependsOn checkS3
         buildZip.doFirst {
             if (tasks.checkS3.exitValue != 0) { throw new StopExecutionException() }
         }
-        */
 
         task uploadToS3(type: Exec) {
             dependsOn checkS3
