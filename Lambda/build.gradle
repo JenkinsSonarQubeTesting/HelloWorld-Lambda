@@ -19,8 +19,7 @@ subprojects { sp ->
             ignoreExitValue true
             doLast {
                 ext {
-                    //exitValue = execResult.getExitValue()
-                    exitValue = 0
+                    exitValue = execResult.getExitValue()
                 }
             }
         }
@@ -37,7 +36,6 @@ subprojects { sp ->
                     "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
                     '--region', 'us-east-1'
         }
-
         uploadToS3.onlyIf {tasks.checkS3.exitValue != 0}
 
         task deployTerraform (type: Exec){
