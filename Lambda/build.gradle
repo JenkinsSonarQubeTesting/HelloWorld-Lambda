@@ -18,8 +18,7 @@ subprojects { sp ->
                     '--region', 'us-east-1'
             ignoreExitValue true
             ext {
-                exitValue = 0
-                //execResult.exitValue
+                exitValue = execResult.exitValue
             }
         }
         buildZip.dependsOn checkS3
