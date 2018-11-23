@@ -23,20 +23,20 @@ subprojects { sp ->
         }
         buildZip.dependsOn checkS3
         buildZip.doFirst {
-            if (tasks.checkS3.exitValue != 0) {
-                throw new StopExecutionException()
-            }
+            if (tasks.checkS3.exitValue == 0) { throw new StopExecutionException() }
         }
 
         task uploadToS3(type: Exec) {
             dependsOn checkS3
-            commandLine 'aws', 's3', 'cp',
-                    buildZip.archivePath,
-                    "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
-                    '--region', 'us-east-1'
+            doLast {
+                commandLine 'aws', 's3', 'cp',
+                        buildZip.archivePath,
+                        "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/",
+                        '--region', 'us-east-1'
+            }
         }
 
-        task deployTerraform(type: Exec) {
+        task deployTerraform (type: Exec){
             commandLine "terraform", "apply",
                     '-var', "aws_user_ID=${project.findProperty('USER_ID') ?: ''}",
                     '-var', "role_name=${project.findProperty('ROLE_NAME') ?: ''}",
@@ -52,7 +52,7 @@ subprojects { sp ->
         deployTerraform.dependsOn initTerraform
     }
 
-    task initTerraform(type: Exec) {
+    task initTerraform (type: Exec){
         commandLine "terraform", "init",
                 "-input=false"
     }
