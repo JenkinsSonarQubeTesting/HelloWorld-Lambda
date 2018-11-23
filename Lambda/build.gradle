@@ -17,8 +17,10 @@ subprojects { sp ->
                     "s3://carter-jenkins-test-bucket/${project.rootProject.name}/${sp.name}/${sp.name}.${sp.version}/${sp.name}-${sp.version}.zip",
                     '--region', 'us-east-1'
             ignoreExitValue true
-            ext {
-                exitValue = execResult.exitValue
+            doLast {
+                ext {
+                    exitValue = execResult.getExitValue()
+                }
             }
         }
         buildZip.dependsOn checkS3
