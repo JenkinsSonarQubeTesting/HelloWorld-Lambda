@@ -19,7 +19,7 @@ subprojects { sp ->
             ignoreExitValue true
             ext.exitValue = {
                 //execResult.exitValue
-                0
+                1
             }
         }
         buildZip.dependsOn checkS3
