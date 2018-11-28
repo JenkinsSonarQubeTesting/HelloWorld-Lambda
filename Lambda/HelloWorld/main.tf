@@ -10,8 +10,20 @@ terraform {
 }
 
 provider "aws" {
+  // default provider
   assume_role {
-    role_arn = "arn:aws:iam::${var.aws_user_ID}:role/${var.role_name}"
+    // terraform-deployer role
+    role_arn = "arn:aws:iam::${var.aws_user_ID}:role/terraform-deployer"
+  }
+  region = "${var.region}"
+  version = ">= 1.11.0"
+}
+
+provider "aws" {
+  alias = "aws-upload-s3"
+  assume_role {
+    // terraform-upload-s3 role
+    role_arn = "arn:aws:iam::${var.aws_user_ID}:role/terraform-upload-s3"
   }
   region = "${var.region}"
   version = ">= 1.11.0"
