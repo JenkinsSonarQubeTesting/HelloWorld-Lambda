@@ -1,2 +1,21 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile (
+            'com.amazonaws:aws-lambda-java-core:1.1.0',
+            'com.amazonaws:aws-lambda-java-events:1.1.0'
+    )
+}
+
 version '1.3'
 ext.handlerClassName = 'testpackage.Example'
