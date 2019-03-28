@@ -2,9 +2,7 @@ package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-
-import java.util.Arrays;
-import java.util.List;
+import java.util.*; //BAD: star imports
 
 public class Hello implements RequestHandler<String, String>
 {
