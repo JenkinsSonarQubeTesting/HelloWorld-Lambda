@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<profile>
+    <name>Sonar way + Custom</name>
+    <language>java</language>
+    <rules>
+        <rule>
+            <repositoryKey>checkstyle</repositoryKey>
+            <key>com.puppycrawl.tools.checkstyle.checks.ArrayTypeStyleCheck</key>
+            <priority>MINOR</priority>
+            <parameters/>
+        </rule>
+        <rule>
+            <repositoryKey>checkstyle</repositoryKey>
+            <key>com.puppycrawl.tools.checkstyle.checks.AvoidEscapedUnicodeCharactersCheck</key>
+            <priority>MAJOR</priority>
+            <parameters>
+                <parameter>
+                    <key>allowIfAllCharactersEscaped</key>
+                    <value>false</value>
+                </parameter>
+                <parameter>
+                    <key>allowNonPrintableEscapes</key>
+                    <value>false</value>
+                </parameter>
+                <parameter>
+                    <key>allowByTailComment</key>
+                    <value>false</value>
+                </parameter>
+                <parameter>
+                    <key>allowEscapesForControlCharacters</key>
+                    <value>false</value>
+                </parameter>
+            </parameters>
+        </rule>
+        <rule>
+            <repositoryKey>checkstyle</repositoryKey>
+            <key>com.puppycrawl.tools.checkstyle.checks.DescendantTokenCheck</key>
+            <priority>MINOR</priority>
+            <parameters>
+                <parameter>
+                    <key>sumTokenCounts</key>
+                    <value>false</value>
+                </parameter>
+            </parameters>
+        </rule>
+    </rules>
+</profile>
