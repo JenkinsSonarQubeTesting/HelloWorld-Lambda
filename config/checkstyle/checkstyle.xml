@@ -93,8 +93,11 @@
         <module name="FallThrough"/>
         <module name="UpperEll"/>
         <module name="ModifierOrder"/>
-        <module name="EmptyLineSeparator">
+        <module name="EmptyLineSeparator"> <!-- Disallow multiple empty lines -->
             <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <property name="allowMultipleEmptyLines" value="false"/>
+            <property name="allowMultipleEmptyLinesInsideClassMembers" value="false"/>
+            <property name="tokens" value="IMPORT, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, CTOR_DEF, STATIC_INIT, INSTANCE_INIT, VARIABLE_DEF, METHOD_DEF"/>
         </module>
         <module name="SeparatorWrap">
             <property name="id" value="SeparatorWrapDot"/>
